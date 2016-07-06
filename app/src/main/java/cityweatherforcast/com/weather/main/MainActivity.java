@@ -98,11 +98,15 @@ public class MainActivity extends AppCompatActivity implements OnReceiveForecast
     }
 
     @Override
-    public void onRecieveForecast(List<Weather> weatherArray) {
-        Toast.makeText(getBaseContext(), "Weather updated", Toast.LENGTH_SHORT).show();
-        autoCompleteTextView.setText("");
-        weatherList.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        weatherList.setAdapter(new RecyclerAdapter(weatherArray));
+    public void onRecieveForecast(List<Weather> weather) {
+        if(weather != null && weather.size() > 0) {
+            Toast.makeText(getBaseContext(), "Weather updated", Toast.LENGTH_SHORT).show();
+            autoCompleteTextView.setText("");
+            weatherList.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+            weatherList.setAdapter(new RecyclerAdapter(weather));
+        } else {
+            Toast.makeText(getBaseContext(), "Weather details couldn't be fetched", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
